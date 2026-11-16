@@ -320,6 +320,20 @@ function bindBtn(id,on,off){const el=$(id);
 bindBtn('#bl',()=>keys.l=1,()=>keys.l=0);
 bindBtn('#br',()=>keys.r=1,()=>keys.r=0);
 bindBtn('#bj',pressJump,()=>keys.j=0);
+/* التحكم باللمس المباشر: اضغط مطولًا نحو الجهة المطلوبة، ولمسة أعلى الشخصية للقفز */
+const tp={on:0,x:0,y:0,id:null,jl:0};
+function tpApply(){
+  if(!tp.on||S.mode!=='play'){return}
+  const r=cv.getBoundingClientRect(),k=r.width/LW;
+  const lx=(tp.x-r.left)/k,ly=(tp.y-r.top)/k,px=P.x-cam.x+(P.w||40)/2,dx=lx-px;
+  keys.l=dx<-28?1:0;keys.r=dx>28?1:0;
+  if(ly<P.y-60){if(!tp.jl){tp.jl=1;pressJump()}}else{tp.jl=0;if(!tp.jb)keys.j=0}
+}
+cv.addEventListener('pointerdown',e=>{if(S.mode!=='play')return;e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(_){}initAudio();tp.on=1;tp.id=e.pointerId;tp.x=e.clientX;tp.y=e.clientY;tp.jl=0;tpApply()});
+cv.addEventListener('pointermove',e=>{if(tp.on&&e.pointerId===tp.id){tp.x=e.clientX;tp.y=e.clientY}});
+const tpEnd=e=>{if(e.pointerId===tp.id&&tp.on){tp.on=0;tp.jl=0;keys.l=keys.r=0;keys.j=0}};
+cv.addEventListener('pointerup',tpEnd);cv.addEventListener('pointercancel',tpEnd);
+
 
 /* ============ بناء المستوى ============ */
 const POOLS=[['flat','bush','high','pit','bush','steps','pit'],['bush','high','crab','pit','pit2','steps','stones','crab'],['bush','crab','pit','pit2','steps','stones','bird','moving','pit2','crab']];
@@ -1247,7 +1261,7 @@ function frame(now){
   const dt=Math.min(.033,(now-last)/1000);last=now;
   if(!rotNeeded&&assetsReady){
     if(S.mode==='home'){P.x=cam.x+LW/2}
-    update(dt);render();
+    tpApply();update(dt);render();
   }
   requestAnimationFrame(frame);
 }
