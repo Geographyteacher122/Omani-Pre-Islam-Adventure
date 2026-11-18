@@ -166,7 +166,7 @@ body:not(.touch) #bj{right:auto;left:13.8em;width:5em;height:5em}
       <div class="mk"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="#ff6f61"/><path d="M20 7c5 7 9 11 9 16a9 9 0 0 1-18 0c0-5 4-9 9-16z" fill="#fff"/><path d="M16 24a4 4 0 0 0 4 4" stroke="#27c4d4" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg><h1 id="hTitle"></h1></div>
       <p id="hSub"></p>
       <div id="heroPick"><div class="hp-t">اختر شخصيتك</div><div class="hp-r"><button type="button" class="hp" data-h="girl"><img alt=""><span>مَزُون</span></button><button type="button" class="hp" data-h="boy"><img alt=""><span>سلطان</span></button></div></div><button class="btn" id="homeStart">ابدأ المغامرة</button>
-      <div class="hint">الحركة بالأسهم، والقفز بمفتاح المسافة. وعلى الأجهزة اللوحية استخدم الأزرار على الشاشة.</div>
+      <div class="hint">على الحاسوب: الحركة بالأسهم، والقفز بمفتاح المسافة. وعلى الهاتف والآيباد: استخدم الأزرار، أو المس الشاشة جهة الحركة، والمس فوق الشخصية للقفز.</div>
     </div>
   </div>
 
@@ -455,7 +455,7 @@ function startStation(si){
   $('#hud').classList.add('on');$('#touch').classList.add('on');
   setHUD();requestAnimationFrame(calcTarget);
   notify('ابدأ المغامرة','','station',2600);
-  if(si===0)notify('طريقة اللعب','اجمع العملات، واقفز لتضرب كتل «؟» بالرأس فتظهر الأسئلة، وتجاوز الحفر والعقبات حتى بوابة السؤال الأخير','info',3600);
+  if(si===0)notify('طريقة اللعب','اجمع العملات، واقفز لتضرب كتل «؟» بالرأس فتظهر الأسئلة، وتجاوز الحفر والعقبات حتى بوابة السؤال الأخير. وللقفز باللمس: المس الشاشة فوق الشخصية','info',4600);
 }
 function newGame(){S={mode:'play',si:0,points:0,coins:0,hearts:CONFIG.hearts,gateOK:[],iris:0,irisDir:1};startStation(0)}
 function respawn(){P.x=P.lastSafe;P.y=GY;P.vx=P.vy=0;P.inv=1.6;P.splashed=false;P.onGround=true}
