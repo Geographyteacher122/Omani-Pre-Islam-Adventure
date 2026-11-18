@@ -216,7 +216,7 @@ if(!CanvasRenderingContext2D.prototype.roundRect){CanvasRenderingContext2D.proto
 /* ============ الإعدادات: عدّلها هنا ============ */
 const CONFIG={
   title:SETTINGS.title,subtitle:SETTINGS.subtitle,course:SETTINGS.course,
-  hearts:5,passRatio:0.6,pointsPerAnswer:50,
+  hearts:10,passRatio:0.6,pointsPerAnswer:50,
   stations:[{name:'الرحلة الكبرى'}],
   questions:[(SETTINGS.questions||[]).slice(0,10).map(it=>{
     const q={q:it.q,source:it.source||'',options:it.options||['صح','خطأ'],answer:it.answer||0};
